@@ -9,8 +9,14 @@ class StringCalculatorTest {
     private val scenarios = listOf(
         Pair("", 0),
         Pair("11", 11),
+        Pair("1\n2", 3),
+        Pair("11\n22", 33),
+        Pair("11\n11\n11\n11\n11\n11", 66),
+        Pair("", 0),
+        Pair("11", 11),
         Pair("1,2", 3),
-        Pair("11,22", 33)
+        Pair("11,22", 33),
+        Pair("11,11,11,11,11,11", 66)
     )
 
     @Test
@@ -19,6 +25,11 @@ class StringCalculatorTest {
             val result = StringCalculator().add(it.first)
             assertEquals(it.second, result)
         }
+    }
+
+    @Test(expected = NumberFormatException::class)
+    fun ifNegativeNumberIsEnteredAnExceptionIsThrown() {
+        StringCalculator().add("-1")
     }
 
 //    @Test
