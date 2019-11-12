@@ -1,6 +1,9 @@
 package com.pickency.karumi
 
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.test.setMain
 import org.junit.Assert
+import org.junit.Before
 import org.junit.Test
 import java.util.*
 
@@ -11,6 +14,12 @@ class MainPresenterTest {
     var hideLoginCalled = false
     var hideLogoutCalled = false
     var showError = false
+
+    @Before
+    fun setUp() {
+        Dispatchers.setMain(Dispatchers.Unconfined)
+        presenter = givenAPresenter()
+    }
 
     @Test
     fun whenLoginSuccessLoginFormIsHidden() {
@@ -54,5 +63,5 @@ class MainPresenterTest {
             showError = true
         }
 
-    })
+    }, Dispatchers.Unconfined)
 }
