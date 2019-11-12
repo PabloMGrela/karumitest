@@ -27,7 +27,7 @@ class StringCalculatorTest {
         }
     }
 
-    @Test(expected = NumberFormatException::class)
+    @Test(expected = AwesomeException::class)
     fun ifNegativeNumberIsEnteredAnExceptionIsThrown() {
         StringCalculator().add("-1")
     }

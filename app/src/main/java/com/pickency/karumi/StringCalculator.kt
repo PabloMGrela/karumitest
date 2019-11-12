@@ -9,7 +9,7 @@ class StringCalculator {
     fun add(numbers: String) =
         when {
             numbers.isEmpty() -> 0
-            numbers.contains("-") -> throw NumberFormatException()
+            numbers.contains("-") -> throw AwesomeException()
             else -> numbers.split(",", "\n").map { it.toInt() }.sum()
         }
 }
