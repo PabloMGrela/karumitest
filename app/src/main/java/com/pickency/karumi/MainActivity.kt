@@ -7,14 +7,14 @@ import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity(), MainViewTranslator {
-    private val presenter = MainPresenter(LogIn(), LogOut(SystemClock()),this)
+    private val presenter = MainPresenter(LogIn(), LogOut(SystemClock()), this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         loginButton.setOnClickListener {
-            presenter.onLoginButtonClicked(usernameEditText.text.toString(), userPassEditText.text.toString())
+            presenter.onLoginButtonClicked(user = usernameEditText.text.toString(), pass = userPassEditText.text.toString())
         }
         logoutButton.setOnClickListener {
             presenter.onLogoutButtonClicked()

@@ -12,21 +12,6 @@ class MainPresenterTest {
     var hideLogoutCalled = false
     var showError = false
 
-    private fun givenAPresenter(clock: Clock = FixedTimeClock(Date())): MainPresenter = MainPresenter(LogIn(), LogOut(clock), object : MainViewTranslator {
-        override fun hideLogin() {
-            hideLoginCalled = true
-        }
-
-        override fun hideLogout() {
-            hideLogoutCalled = true
-        }
-
-        override fun showError(message: String) {
-            showError = true
-        }
-
-    })
-
     @Test
     fun whenLoginSuccessLoginFormIsHidden() {
         presenter = givenAPresenter()
@@ -55,4 +40,19 @@ class MainPresenterTest {
         Assert.assertTrue(showError)
         Assert.assertFalse(hideLogoutCalled)
     }
+
+    private fun givenAPresenter(clock: Clock = FixedTimeClock(Date())): MainPresenter = MainPresenter(LogIn(), LogOut(clock), object : MainViewTranslator {
+        override fun hideLogin() {
+            hideLoginCalled = true
+        }
+
+        override fun hideLogout() {
+            hideLogoutCalled = true
+        }
+
+        override fun showError(message: String) {
+            showError = true
+        }
+
+    })
 }
