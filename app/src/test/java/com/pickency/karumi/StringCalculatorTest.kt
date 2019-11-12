@@ -32,6 +32,11 @@ class StringCalculatorTest {
         StringCalculator().add("-1")
     }
 
+    @Test(expected = AwesomeException::class)
+    fun ifSeparatorIsNotAcceptedAnExceptionIsThrown() {
+        StringCalculator().add("23.12")
+    }
+
 //    @Test
 //    fun returnsZeroIfStringIsEmpty() = evaluateStringCalculator("", 0)
 //
