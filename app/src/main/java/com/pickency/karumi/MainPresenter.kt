@@ -4,7 +4,10 @@ import kotlinx.coroutines.*
 import kotlin.coroutines.CoroutineContext
 
 class MainPresenter(
-    val logIn: LogIn, val logOut: LogOut, val view: MainViewTranslator, private val context: CoroutineContext = Dispatchers.Default
+    private val logIn: LogIn,
+    private val logOut: LogOut,
+    private val view: MainViewTranslator,
+    private val context: CoroutineContext = Dispatchers.Default
 ) : CoroutineScope by MainScope() {
 
     fun onLoginButtonClicked(user: String, pass: String) = launch {
