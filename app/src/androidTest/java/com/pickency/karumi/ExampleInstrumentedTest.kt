@@ -18,15 +18,19 @@ import org.junit.runner.RunWith
 class ExampleInstrumentedTest {
 
     private val appContext = InstrumentationRegistry.getInstrumentation().targetContext
+    lateinit var counterStorage: CounterStorage
+    lateinit var magicCounter: MagicCounter
 
     @Before
     fun setUp() {
-        CounterStorage(appContext).clear()
+        magicCounter = MagicCounter(appContext)
+        counterStorage = CounterStorage(appContext)
+        counterStorage.clear()
     }
 
     @After
     fun after() {
-        CounterStorage(appContext).clear()
+        counterStorage.clear()
     }
 
     @Test
@@ -40,20 +44,39 @@ class ExampleInstrumentedTest {
         val savedValue = 3
         saveValue(savedValue)
 
-        assertEquals(savedValue, CounterStorage(appContext).getCounter())
+        assertEquals(savedValue, counterStorage.getCounter())
     }
 
     @Test
     fun whenGetFromSPForFirstTimeNullIsReturned() {
-        assertNull(CounterStorage(appContext).getCounter())
+        assertNull(counterStorage.getCounter())
     }
 
     @Test
     fun whenTwoValuesAreSavedTheSecondOneIsReturned() {
         saveValue(1)
         saveValue(2)
-        assertEquals(2, CounterStorage(appContext).getCounter())
+        assertEquals(2, counterStorage.getCounter())
     }
 
-    private fun saveValue(value: Int) = CounterStorage(appContext).save(value)
+    @Test
+    fun whenRandomIsLessThan100ValueIsIncrementedOne() {
+        val result = magicCounter.increment(5)
+        assertEquals(1, result)
+    }
+
+    @Test
+    fun whenRandomIsMoreThan100ValueIsIncrementedInRandom() {
+        val result = magicCounter.increment(500)
+        assertEquals(500, result)
+    }
+
+    @Test
+    fun whenDecreaseIsCalledNumberDecrease() {
+        counterStorage.save(100)
+        val result = magicCounter.decrement()
+        assertEquals(result, 99)
+    }
+
+    private fun saveValue(value: Int) = counterStorage.save(value)
 }
