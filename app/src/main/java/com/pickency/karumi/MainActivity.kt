@@ -14,9 +14,11 @@ class MainActivity : AppCompatActivity(), MainViewTranslator {
         setContentView(R.layout.activity_main)
 
         loginButton.setOnClickListener {
+            CounterStorage(this).save(3)
             presenter.onLoginButtonClicked(user = usernameEditText.text.toString(), pass = userPassEditText.text.toString())
         }
         logoutButton.setOnClickListener {
+            Toast.makeText(this, CounterStorage(this).getCounter().toString(), Toast.LENGTH_LONG).show()
             presenter.onLogoutButtonClicked()
         }
     }
