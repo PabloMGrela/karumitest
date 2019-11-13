@@ -72,6 +72,13 @@ class ExampleInstrumentedTest {
     }
 
     @Test
+    fun whenRandomIsMoreThan100AndIsNotNewOne() {
+        counterStorage.save(100)
+        val result = magicCounter.increment(200)
+        assertEquals(300, result)
+    }
+
+    @Test
     fun whenDecreaseIsCalledNumberDecrease() {
         counterStorage.save(100)
         val result = magicCounter.decrement()
