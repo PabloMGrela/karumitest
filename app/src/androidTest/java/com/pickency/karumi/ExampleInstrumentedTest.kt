@@ -2,6 +2,7 @@ package com.pickency.karumi
 
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
+import org.junit.After
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNull
 import org.junit.Before
@@ -20,6 +21,11 @@ class ExampleInstrumentedTest {
 
     @Before
     fun setUp() {
+        CounterStorage(appContext).clear()
+    }
+
+    @After
+    fun after() {
         CounterStorage(appContext).clear()
     }
 
